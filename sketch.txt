@@ -1,0 +1,5 @@
+Trivial guessing game
+	timer
+	no page reload to reset
+		so the whole thing has to lilve in an object
+
