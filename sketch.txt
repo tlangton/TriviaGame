@@ -1,5 +1,23 @@
 Trivial guessing game
 	timer
 	no page reload to reset
-		so the whole thing has to lilve in an object
+		so the whole thing has to live in an object
 
+Presentation
+
+title
+	question
+		answer choice 1
+		answer choice 2
+		answer choice 3
+		answer choice 4
+
+after answer
+		correct answer / pic
+		tint answers divs?
+tally
+
+	control by hiding / unhiding divs
+
+all on a timer -
+	function on - click a choice, or timer expires.
