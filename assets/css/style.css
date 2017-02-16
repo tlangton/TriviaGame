@@ -31,3 +31,21 @@ font-size: 64px;
 	/*display: none;*/
 	color: #33f;
 }
+
+#gameOver {
+font-size: 45px;
+background-color: red
+color: white;
+}
+
+#question {
+font-size: 30px;
+text-align: center;
+
+}
+
+.active {
+font-size: 24px;
+text-align: center;
+
+}
