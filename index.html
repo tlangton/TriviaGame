@@ -3,12 +3,53 @@
 <head>
 	<title>Trival</title>
 
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
 
-<script type="text/javascript" src="assets/javascript/app.js"></script>
+	<div class="jumbotron">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1>1960!</h1>
+					<p>Testing your knowledge of the history of the nascent space age.</p>
+					<div class="col-lg-12">
+						<h2 id="displayText">Seconds Remaining: <span id="display">30</span></h2>
+						<p><a id="startButton" class="btn btn-danger ">Start &raquo;</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="coverpic">
+		<img class="center-block" src="assets/images/Neil_Armstrong_X-15_1960.jpg">
+		<div class="caption"> Neil Armstrong and the X-15</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+		<div class="col-lg-12">
+				<div id="questionFields"  class="hideMe">
+					<p>This is where the questions live.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+	<script type="text/javascript" src="assets/javascript/app.js"></script>
 </body>
 </html>
