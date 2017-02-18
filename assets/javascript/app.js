@@ -3,22 +3,11 @@ function startUp(){
 };
 startUp();
 
-//game stats
-var gameStats = {
-	wins: 0,
-	losses: 0
-}
-
-$("#tally").text("Wins: " + gameStats.wins + "  Losses: " + gameStats.losses);
-
 var gameRound = {
 	answerCorrect: 0,
 	answerIncorrect: 0,
 	timeExp: 0
 }
-
-$("#gameScore").text("Correct: " + gameRound.answerCorrect + " Incorrect: " + gameRound.answerIncorrect + " Time Expired: " + gameRound.timeExp)
-
 
 //  Variable that will hold our setInterval that runs the timer
 var intervalId;
@@ -32,46 +21,59 @@ var questionNumber = 0;
 var correctAnswer;
 var vMessage;
 
+var interactive = true;
+
 $("#startButton").click(startButton);
 
 function startButton(){
 	$("#coverpic").fadeOut();
 	$("#caption").fadeOut();
 	$("#startButton").fadeOut();
-	setTimeout(unhideQuestions, 1000)
+	$("#message").html("");
+	gameRound.answerCorrect = 0;
+	gameRound.answerIncorrect = 0;
+	gameRound.timeExp = 0;
+	gameScore();
+	setTimeout(unhideQuestions, 1000);
+	resetAnswerColors()
 	start();
 };
 
-
-
 function start() {
-	intervalId = setInterval(count,1000);
+	interactive = true
+	if(running == false){
+		intervalId = setInterval(count,1000);
+		running = true;
+	}
 };
-
 
 function count() {
 	time --;
 	$("#display").html(time);
 	if (time == 0) {
-		clearInterval (intervalId);
+		clearInterval(intervalId);
+		running = false;
 		roundExpired();
 	};
 };
 
+function gameScore(){
+	$("#gameScore").text("Correct: " + gameRound.answerCorrect + " Incorrect: " + gameRound.answerIncorrect + " Time Expired: " + gameRound.timeExp);
+}
+gameScore()
 
 function roundExpired() {
 	$("#message").html("Time expired!");
-	gameRound.timeExp ++;
-	$("#tally").text("Wins: " + gameStats.wins + "  Losses: " + gameStats.losses);
-	$("#gameScore").text("Correct: " + gameRound.answerCorrect + " Incorrect: " + gameRound.answerIncorrect + " Time Expired: " + gameRound.timeExp);
-
+	gameRound.timeExp++;
+	gameScore()
+	resetAnswerColors();
 	setTimeout(clearRoundExpired, 2000);
-
 }
 
 function clearRoundExpired() {
 	$("#message").html("");
-	questionNumber ++;
+	questionNumber++;
+	//if questions are left?
 	reset();
 	start();
 	popQuestion();
@@ -79,21 +81,21 @@ function clearRoundExpired() {
 
 
 function reset() {
-	clearInterval (intervalId);
+	clearInterval(intervalId);
+	running = false;
 	$("#display").html("30");
 	time = 30;
 };
 
 function unhideQuestions() {
 	$("#questionFields").removeClass("hidden");
+	$("#answer1").addClass("success")
 	popQuestion()
 };
 
 function hideQuestions() {
 	$("#questionFields").addClass("hidden");
 	$("#startButton").fadeIn();
-	// $("#coverpic").fadeIn();
-	// $("#caption").fadeIn();
 };
 
 
@@ -163,36 +165,83 @@ $(".choice").click(function(){
 });
 
 function answer() {
+	if (!interactive) { return }
+		interactive = false
+
 	if (butID == correctAnswer) {
 		gameRound.answerCorrect ++;
 		vMessage = "Congrats! ";
-		$("#gameScore").text("Correct: " + gameRound.answerCorrect + " Incorrect: " + gameRound.answerIncorrect + " Time Expired: " + gameRound.timeExp);
+		gameScore();
+		// $("#gameScore").text("Correct: " + gameRound.answerCorrect + " Incorrect: " + gameRound.answerIncorrect + " Time Expired: " + gameRound.timeExp);
 	} else {
 		gameRound.answerIncorrect ++;
-		vMessage = "Wrongo! ";
-		$("#gameScore").text("Correct: " + gameRound.answerCorrect + " Incorrect: " + gameRound.answerIncorrect + " Time Expired: " + gameRound.timeExp);
+		vMessage = "Wrongo!  Correct answer is " + correctAnswer;
+		gameScore();
+		// $("#gameScore").text("Correct: " + gameRound.answerCorrect + " Incorrect: " + gameRound.answerIncorrect + " Time Expired: " + gameRound.timeExp);
 	}
 
-	reset();
+	// $(".choice").removeClass("active");
+	// $(".choice").addClass("disabled");
+
 	$("#message").html(vMessage);
 	setAnswerColors();
+	reset();
 
-	setTimeout(function(){
-		questionNumber ++;
-		popQuestion();
-		$("#message").html("");
-		resetAnswerColors();
-		start(); },2000);
+	questionNumber ++;
+	console.log("q: " + questionNumber);
+	console.log("L: " + quizContent.length);
+	if (questionNumber >= quizContent.length) {
+		setTimeout(function() {
+			$("#message").html("Game Over!");
+			hideQuestions();
+			$("#coverpic").show();
+			questionNumber = 0;
+		}, 2000)
+		clearInterval(intervalId);
+
+	}
+	else{
+		setTimeout(function(){
+
+			popQuestion();
+			$("#message").html("");
+			resetAnswerColors();
+			// $(".choice").removeClass("disabled");
+			// $(".choice").addClass("active");
+			start(); },2000);
+	}
 
 }
 
 
 function setAnswerColors() {
-$(".choice").removeClass("warning");
-// $(".choice").addClass("danger");
-$("[butId = correctAnswer]").addClass("success");
+	console.log(butID);
+	console.log(correctAnswer);
+	$(".choice").removeClass("warning");
+	$(".choice").addClass("danger");
+
+	switch(correctAnswer){
+		case 1:
+		$("#answer1").removeClass("danger");
+		$("#answer1").addClass("success");
+break;
+		case 2:
+		$("#answer2").removeClass("danger");
+		$("#answer2").addClass("success");
+break;
+		case 3:
+		$("#answer3").removeClass("danger");
+		$("#answer3").addClass("success");
+break;
+		case 4:
+		$("#answer4").removeClass("danger");
+		$("#answer4").addClass("success");
+break;
+	}
 }
 
+
 function resetAnswerColors() {
-$(".choice").addClass("warning");
+	$(".choice").removeClass("danger");
+	$(".choice").addClass("warning");
 }
