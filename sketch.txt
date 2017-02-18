@@ -21,3 +21,50 @@ tally
 
 all on a timer -
 	function on - click a choice, or timer expires.
+
+
+
+
+
+
+questions and answers
+
+What was the name of the US Spy Plane shot down over the USSR in 1960?
+U2*
+UB40
+SR71
+Soyuz 6
+U-2.jpg
+Gary Powers piloted the doomed plane for the CIA and was eventually exchanged for a Soviet officer held by the US.
+
+Where were the 1960 Summer Olympics held?
+Rome, Italy*
+Tokyo, Japan
+Los Angeles, CA
+Athens, Greece
+1960_Summer_Olympic.png
+Cassius Clay, won the light-heavyweight gold medal in Boxing. Clay later changed his name to Muhammad Ali.
+
+Fast food is never the same with the 1960 founding of this iconic restaurant.
+Domino's*
+Burger King
+McDonalds
+Pizza Hut
+Domino.png
+Well, it gets there fast.
+
+Pop Music was in the valley between Elvis, who was discharged from the army in 1960, and before the Beatles came to America. These brothers filled the airwaves with light pop.
+The Everly Brothers*
+The Righteous Brothers
+The Chambers Brothers
+The Smothers Brothers
+Phil_Everly.jpg
+The Beatles eventually covered some of the Everly's songs.
+
+John F. Kennedy was elected President over rival Richard Milhous Nixon. Who was Nixon's VP running mate?
+Henry Cabot Lodge*
+Estes Kefauver
+Adlai Stevenson
+Robert Goddard
+Cabot_Lodge.jpg
+Yes, Nixon's middle named served as the inspiration for The Simpson's character.
