@@ -63,7 +63,7 @@ function gameScore(){
 gameScore()
 
 function roundExpired() {
-	$("#message").html("Time expired!");
+	$("#message").html("Time expired! Correct answer is " + correctAnswer);
 	gameRound.timeExp++;
 	gameScore()
 	resetAnswerColors();
@@ -89,7 +89,6 @@ function reset() {
 
 function unhideQuestions() {
 	$("#questionFields").removeClass("hidden");
-	$("#answer1").addClass("success")
 	popQuestion()
 };
 
@@ -129,12 +128,53 @@ var quizContent = [{
 	correctChoice: 1,
 	image:"assets/images/1960_Summer_Olympic.png",
 	comment: "Cassius Clay, won the light-heavyweight gold medal in Boxing. Clay later changed his name to Muhammad Ali."
+},
+{
+	question: "Fast food is never the same with the 1960 founding of this iconic restaurant.",
+	choice1: "Burger King",
+	choice2: "McDonalds",
+	choice3: "Pizza Hut",
+	choice4: "Domino's",
+	correctChoice: 4,
+	image:"assets/images/Domino.png",
+	comment: "Well, it gets there fast."
+},
+{
+	question: "Pop Music was in the valley between Elvis, who was discharged from the army in 1960, and before the Beatles came to America. These brothers filled the airwaves with light pop.",
+	choice1: "The Righteous Brothers",
+	choice2: "The Everly Brothers",
+	choice3: "The Chambers Brothers",
+	choice4: "The Smothers Brothers",
+	correctChoice: 2,
+	image:"assets/images/Phil_Everly.jpg",
+	comment: "The Beatles eventually covered some of the Everly's songs."
+},
+{
+	question: "John F. Kennedy was elected President over rival Richard Milhous Nixon. Who was Nixon's VP running mate?",
+	choice1: "Estes Kefauver",
+	choice2: "Adlai Stevenson",
+	choice3: "Robert Goddard",
+	choice4: "Henry Cabot Lodge",
+	correctChoice: 4,
+	image:"assets/images/Cabot_Lodge.jpg",
+	comment: "Yes, Nixon's middle named served as the inspiration for The Simpson's character."
+},
+{
+	question: "Besides piloting an X15 rocket plane, Neil Armstrong is also notable for?",
+	choice1: "One small step for man...",
+	choice2: "There are those who look at things the way they are, and ask why... I dream of things that never were, and ask why not?",
+	choice3: "I have a dream...",
+	choice4: "Ask not what your country can do for you...",
+	correctChoice: 1,
+	image:"assets/images/moonprint.jpg",
+	comment: "Yes, Nixon's middle named served as the inspiration for The Simpson's character."
+
 }];
 
-
+console.log("qc " + quizContent.length);
 
 function popQuestion() {
-	if (questionNumber < 3) {
+	if (questionNumber <= quizContent.length) {
 		$("#question").html(quizContent[questionNumber].question);
 		$("#answer1").html(quizContent[questionNumber].choice1);
 		$("#answer2").html(quizContent[questionNumber].choice2);
@@ -172,24 +212,17 @@ function answer() {
 		gameRound.answerCorrect ++;
 		vMessage = "Congrats! ";
 		gameScore();
-		// $("#gameScore").text("Correct: " + gameRound.answerCorrect + " Incorrect: " + gameRound.answerIncorrect + " Time Expired: " + gameRound.timeExp);
-	} else {
+		} else {
 		gameRound.answerIncorrect ++;
 		vMessage = "Wrongo!  Correct answer is " + correctAnswer;
 		gameScore();
-		// $("#gameScore").text("Correct: " + gameRound.answerCorrect + " Incorrect: " + gameRound.answerIncorrect + " Time Expired: " + gameRound.timeExp);
 	}
-
-	// $(".choice").removeClass("active");
-	// $(".choice").addClass("disabled");
 
 	$("#message").html(vMessage);
 	setAnswerColors();
 	reset();
 
 	questionNumber ++;
-	console.log("q: " + questionNumber);
-	console.log("L: " + quizContent.length);
 	if (questionNumber >= quizContent.length) {
 		setTimeout(function() {
 			$("#message").html("Game Over!");
@@ -198,25 +231,18 @@ function answer() {
 			questionNumber = 0;
 		}, 2000)
 		clearInterval(intervalId);
-
 	}
 	else{
 		setTimeout(function(){
-
 			popQuestion();
 			$("#message").html("");
 			resetAnswerColors();
-			// $(".choice").removeClass("disabled");
-			// $(".choice").addClass("active");
 			start(); },2000);
 	}
-
 }
 
 
 function setAnswerColors() {
-	console.log(butID);
-	console.log(correctAnswer);
 	$(".choice").removeClass("warning");
 	$(".choice").addClass("danger");
 
@@ -224,19 +250,19 @@ function setAnswerColors() {
 		case 1:
 		$("#answer1").removeClass("danger");
 		$("#answer1").addClass("success");
-break;
+		break;
 		case 2:
 		$("#answer2").removeClass("danger");
 		$("#answer2").addClass("success");
-break;
+		break;
 		case 3:
 		$("#answer3").removeClass("danger");
 		$("#answer3").addClass("success");
-break;
+		break;
 		case 4:
 		$("#answer4").removeClass("danger");
 		$("#answer4").addClass("success");
-break;
+		break;
 	}
 }
 
